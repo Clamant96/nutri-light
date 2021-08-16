@@ -57,16 +57,16 @@ public class ProdutoController {
 		return ResponseEntity.ok(repository.save(produto));
 	}
 	
-	@PutMapping("/tabela_produtos/produtos/{idProduto}/pedidos/{idPedido}")
-	public ResponseEntity<Produto> putAdicionarProdutoLista(@PathVariable long idProduto, @PathVariable long idPedido) {
+	@PutMapping("/tabela_produtos/produtos/{idProduto}/lista/{idLista}")
+	public ResponseEntity<Produto> putAdicionarProdutoLista(@PathVariable long idProduto, @PathVariable long idLista) {
 		
-		return ResponseEntity.ok(service.adicionaProduto(idProduto, idPedido));
+		return ResponseEntity.ok(service.adicionaProduto(idProduto, idLista));
 	}
 	
-	@PutMapping("deleta/tabela_produtos/produtos/{idProduto}/pedidos/{idPedido}")
-	public void putRemoverProdutoLista(@PathVariable long idProduto, @PathVariable long idPedido) {
+	@PutMapping("/deleta/tabela_produtos/produtos/{idProduto}/lista/{idLista}")
+	public void putRemoverProdutoLista(@PathVariable long idProduto, @PathVariable long idLista) {
 		
-		service.deletarProduto(idProduto, idPedido);
+		service.deletarProduto(idProduto, idLista);
 	}
 	
 	@DeleteMapping("/{id}")

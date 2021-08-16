@@ -21,6 +21,8 @@ public class UserLogin {
 	private String token;
 	
 	private String foto;
+	
+	private double imc;
 
 	public long getId() {
 		return id;
@@ -100,6 +102,14 @@ public class UserLogin {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public double getImc() {
+		return imc;
+	}
+
+	public void setImc(double imc) {
+		this.imc = imc;
 	}
 
 }

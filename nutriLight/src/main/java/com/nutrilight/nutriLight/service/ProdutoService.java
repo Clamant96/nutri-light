@@ -28,12 +28,118 @@ public class ProdutoService {
 		/* SE O 'PRODUTO' E 'LISTA' EXISTIREM E O PRODUTO A SER INSEIDO AINDA NAO EXISTIR NA LISTA OU VICE VERSA ENTRA NA CONDICAO */
 		if(produtoExistente.isPresent() && listaExistente.isPresent() && !(produtoExistente.get().getListas().contains(listaExistente.get().getId()))) {
 			
-			/* ADICIONA O PRODUTO AO CARRINHO DO USUARIO */
-			produtoExistente.get().getListas().add(listaExistente.get());
+			/* CONTADOR DE PROTEINAS NA LISTA/PRODUTO */
+			int contador = 0;
 			
-			System.out.println("Retorno: "+ listaExistente.get().getProdutos().contains(produtoExistente.get()));
+			System.out.println("Contador: "+ contador);
+			System.out.println("ID: "+ produtoExistente.get().getCategoria().getId());
 			
-			System.out.println("QTD produtos "+ listaExistente.get().getProdutos().size());
+			switch((int) produtoExistente.get().getCategoria().getId()) {
+				case 1:
+					System.out.println("MENU | PROTEINAS");
+					
+					/** 
+					 * NAVEGA ENTRE O PRODUTO E VERIFICA SE TEM NO MAXIMO 2 PROTEINAS 
+					 * CASO TENHA MAIS DE DUAS PROTEINAS, NAO E INSERIDO MAIS UM NA LISTA, POIS O MAXIMO SAO 2
+					 * */
+					for(int i = 0; i < listaExistente.get().getProdutos().size(); i++) {
+						if(listaExistente.get().getProdutos().get(i).getCategoria().getId() == 1) {
+							contador++;
+						}
+						
+					}
+					
+					/* ADICIONA O PRODUTO A LISTA DO USUARIO */
+					if(contador < 2 && !(listaExistente.get().getProdutos().contains(produtoExistente.get()))) {
+						produtoExistente.get().getListas().add(listaExistente.get());
+						
+					}else {
+						System.out.println("Voce ja tem a quantidade maxima de produtos dessa categoria!");
+						
+					}
+					
+				break;
+				
+				case 2:
+					System.out.println("MENU | CARBOIDRATOS");
+					
+					/** 
+					 * NAVEGA ENTRE O PRODUTO E VERIFICA SE TEM NO MAXIMO 2 PROTEINAS 
+					 * CASO TENHA MAIS DE DUAS PROTEINAS, NAO E INSERIDO MAIS UM NA LISTA, POIS O MAXIMO SAO 3
+					 * */
+					for(int i = 0; i < listaExistente.get().getProdutos().size(); i++) {
+						if(listaExistente.get().getProdutos().get(i).getCategoria().getId() == 2) {
+							contador++;
+						}
+						
+					}
+					
+					/* ADICIONA O PRODUTO A LISTA DO USUARIO */
+					if(contador < 3 && !(listaExistente.get().getProdutos().contains(produtoExistente.get()))) {
+						produtoExistente.get().getListas().add(listaExistente.get());
+						
+					}else {
+						System.out.println("Voce ja tem a quantidade maxima de produtos dessa categoria!");	
+						
+					}
+					
+				break;
+				
+				case 3:
+					System.out.println("MENU | VERDURAS");
+					
+					/** 
+					 * NAVEGA ENTRE O PRODUTO E VERIFICA SE TEM NO MAXIMO 2 PROTEINAS 
+					 * CASO TENHA MAIS DE DUAS PROTEINAS, NAO E INSERIDO MAIS UM NA LISTA, POIS O MAXIMO SAO 5
+					 * */
+					for(int i = 0; i < listaExistente.get().getProdutos().size(); i++) {
+						if(listaExistente.get().getProdutos().get(i).getCategoria().getId() == 3) {
+							contador++;
+						}
+						
+					}
+					
+					/* ADICIONA O PRODUTO A LISTA DO USUARIO */
+					if(contador < 5 && !(listaExistente.get().getProdutos().contains(produtoExistente.get()))) {
+						produtoExistente.get().getListas().add(listaExistente.get());
+						
+					}else {
+						System.out.println("Voce ja tem a quantidade maxima de produtos dessa categoria!");
+						
+					}
+					
+				break;
+				
+				case 4:
+					System.out.println("MENU | FRUTAS");
+					
+					/** 
+					 * NAVEGA ENTRE O PRODUTO E VERIFICA SE TEM NO MAXIMO 2 PROTEINAS 
+					 * CASO TENHA MAIS DE DUAS PROTEINAS, NAO E INSERIDO MAIS UM NA LISTA, POIS O MAXIMO SAO 3
+					 * */
+					for(int i = 0; i < listaExistente.get().getProdutos().size(); i++) {
+						if(listaExistente.get().getProdutos().get(i).getCategoria().getId() == 4) {
+							contador++;
+						}
+						
+					}
+					
+					/* ADICIONA O PRODUTO A LISTA DO USUARIO */
+					if(contador < 3 && !(listaExistente.get().getProdutos().contains(produtoExistente.get()))) {
+						produtoExistente.get().getListas().add(listaExistente.get());
+						
+					}else {
+						System.out.println("Voce ja tem a quantidade maxima de produtos dessa categoria!");
+						
+					}
+					
+				break;
+				
+				default:
+					System.out.println("Opcao invalida!");
+					
+				break;
+			}
 			
 			produtoRepository.save(produtoExistente.get());
 			listaRepository.save(listaExistente.get());

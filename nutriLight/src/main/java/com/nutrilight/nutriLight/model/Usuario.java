@@ -40,6 +40,8 @@ public class Usuario {
 	
 	private String foto;
 	
+	private double imc;
+	
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     @JsonIgnoreProperties("usuario")
@@ -118,5 +120,13 @@ public class Usuario {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	
+
+	public double getImc() {
+		return imc;
+	}
+
+	public void setImc(double imc) {
+		this.imc = imc;
+	}
+
 }

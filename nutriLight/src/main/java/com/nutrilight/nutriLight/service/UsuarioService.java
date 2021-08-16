@@ -77,6 +77,7 @@ public class UsuarioService {
 				user.get().setIdade(usuario.get().getIdade());
 				user.get().setPeso(usuario.get().getPeso());
 				user.get().setLista(usuario.get().getLista());
+				user.get().setImc(usuario.get().getImc());
 
 				return user;
 
