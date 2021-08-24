@@ -151,6 +151,18 @@ public class ProdutoService {
 		return null;
 	}
 	
+	/* EDITA PRODUTO (SOMENTE O USUARIO QUE CRIOU PODE REALIZAR ESSA ACAO) */
+	public Produto editarProdutoDoUsuario(long idProduto, String username) {
+		Optional<Produto> produtoExistente = produtoRepository.findById(idProduto);
+		
+		if(produtoExistente.get().getUsername() == username) {
+			produtoRepository.save(produtoExistente.get());
+			return produtoRepository.save(produtoExistente.get());
+		}
+		
+		return null;
+	}
+	
 	/* DELETAR OBJETOS DA LISTA */
 	public void deletarProduto(long idProduto, long idLista) {
 

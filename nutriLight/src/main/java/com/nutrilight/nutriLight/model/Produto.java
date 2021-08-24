@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -47,6 +48,12 @@ public class Produto {
 	)
 	@JsonIgnoreProperties({"usuario", "produtos"})
 	private List<Lista> listas = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("produto")
+	private List<Mensagem> mensagens;
+	
+	private String username;
 
 	public long getId() {
 		return id;
@@ -96,4 +103,20 @@ public class Produto {
 		this.listas = listas;
 	}
 
+	public List<Mensagem> getMensagens() {
+		return mensagens;
+	}
+
+	public void setMensagens(List<Mensagem> mensagens) {
+		this.mensagens = mensagens;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 }

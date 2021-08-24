@@ -41,6 +41,7 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/listas/listaProdutos/{idListaUsuario}").permitAll()
 		.antMatchers("/produtos").permitAll()
 		.antMatchers("/produtos/{id}").permitAll()
+		.antMatchers("/produtos/editar_produto").permitAll()
 		.antMatchers("/produtos/tabela_produtos").permitAll()
 		.antMatchers("/produtos/tabela_produtos/produtos/{idProduto}/lista/{idLista}").permitAll()
 		.antMatchers("/produtos/deleta/tabela_produtos/produtos/{idProduto}/lista/{idLista}").permitAll()
