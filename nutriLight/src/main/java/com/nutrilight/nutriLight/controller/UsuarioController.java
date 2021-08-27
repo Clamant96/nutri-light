@@ -93,6 +93,20 @@ public class UsuarioController {
 		
 	}
 	
+	/*
+	 * EXPLICACAO URI:
+	 * 
+	 * 	/likes_usuario_postagem -> nome da tabela associativa que esta no model Postagem
+	 * 	/likePostagem -> Lista de postagens na classes usuario
+	 * 	/like -> Lista de usuarios na classe Postagem
+	 * 
+	 * */
+	@PutMapping("/likes_usuario_postagem/likeProduto/{idProduto}/like/{idUsuario}")
+	public ResponseEntity<Usuario> postLikePostagem(@PathVariable long idUsuario, @PathVariable long idProduto){
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.likePostagem(idUsuario, idProduto));
+	}
+	
 	@DeleteMapping("/{id}")
 	public void deleteUsuario(@PathVariable long id) {
 		

@@ -19,6 +19,9 @@ public class ProdutoService {
 	@Autowired
 	private ListaRepository listaRepository;
 	
+	/* CONTADOR DE PROTEINAS NA LISTA/PRODUTO */
+	int contador = 0;
+	
 	/* ADICIONA OBJETOS NA LISTA */
 	public Produto adicionaProduto(long idProduto, long idLista) {
 		
@@ -27,9 +30,6 @@ public class ProdutoService {
 		
 		/* SE O 'PRODUTO' E 'LISTA' EXISTIREM E O PRODUTO A SER INSEIDO AINDA NAO EXISTIR NA LISTA OU VICE VERSA ENTRA NA CONDICAO */
 		if(produtoExistente.isPresent() && listaExistente.isPresent() && !(produtoExistente.get().getListas().contains(listaExistente.get().getId()))) {
-			
-			/* CONTADOR DE PROTEINAS NA LISTA/PRODUTO */
-			int contador = 0;
 			
 			System.out.println("Contador: "+ contador);
 			System.out.println("ID: "+ produtoExistente.get().getCategoria().getId());
@@ -48,6 +48,8 @@ public class ProdutoService {
 						}
 						
 					}
+					
+					System.out.println("Contagem contador: "+ contador);
 					
 					/* ADICIONA O PRODUTO A LISTA DO USUARIO */
 					if(contador < 2 && !(listaExistente.get().getProdutos().contains(produtoExistente.get()))) {
@@ -73,6 +75,8 @@ public class ProdutoService {
 						}
 						
 					}
+					
+					System.out.println("Contagem contador: "+ contador);
 					
 					/* ADICIONA O PRODUTO A LISTA DO USUARIO */
 					if(contador < 3 && !(listaExistente.get().getProdutos().contains(produtoExistente.get()))) {
@@ -144,9 +148,13 @@ public class ProdutoService {
 			produtoRepository.save(produtoExistente.get());
 			listaRepository.save(listaExistente.get());
 			
+			contador = 0;
+			
 			return produtoRepository.save(produtoExistente.get());
 			
 		}
+		
+		contador = 0;
 		
 		return null;
 	}
@@ -155,8 +163,9 @@ public class ProdutoService {
 	public Produto editarProdutoDoUsuario(long idProduto, String username) {
 		Optional<Produto> produtoExistente = produtoRepository.findById(idProduto);
 		
-		if(produtoExistente.get().getUsername() == username) {
+		if(produtoExistente.get().getUsuario().getUsername().equals(username)) {
 			produtoRepository.save(produtoExistente.get());
+			
 			return produtoRepository.save(produtoExistente.get());
 		}
 		

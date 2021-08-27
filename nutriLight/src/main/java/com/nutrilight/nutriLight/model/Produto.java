@@ -53,7 +53,13 @@ public class Produto {
 	@JsonIgnoreProperties("produto")
 	private List<Mensagem> mensagens;
 	
-	private String username;
+	@ManyToOne
+	@JsonIgnoreProperties("produtos")
+	private Usuario usuario;
+	
+	@ManyToMany(mappedBy = "likeProduto", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({"nome", "idade", "peso", "username", "senha", "altura", "foto", "imc", "lista", "produtos", "likeProduto"})
+	private List<Usuario> like = new ArrayList<>();
 
 	public long getId() {
 		return id;
@@ -111,12 +117,20 @@ public class Produto {
 		this.mensagens = mensagens;
 	}
 
-	public String getUsername() {
-		return username;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public List<Usuario> getLike() {
+		return like;
+	}
+
+	public void setLike(List<Usuario> like) {
+		this.like = like;
 	}
 	
 }

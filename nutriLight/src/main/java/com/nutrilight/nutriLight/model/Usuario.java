@@ -1,10 +1,18 @@
 package com.nutrilight.nutriLight.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -47,7 +55,18 @@ public class Usuario {
     @JsonIgnoreProperties("usuario")
 	private Lista lista;
 	
-	public Usuario() {}
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("usuario")
+	private List<Produto> produtos;
+	
+	@ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	@JoinTable(
+	  name = "likes_usuario_postagem", 
+	  joinColumns = @JoinColumn(name = "produto_id"), 
+	  inverseJoinColumns = @JoinColumn(name = "usuario_id")
+	  )
+	@JsonIgnoreProperties({"nome", "kg", "img", "categoria", "listas", "mensagens", "usuario", "like"})
+	private List<Produto> likeProduto = new ArrayList<>();
 
 	public long getId() {
 		return id;
@@ -129,4 +148,20 @@ public class Usuario {
 		this.imc = imc;
 	}
 
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
+	public List<Produto> getLikeProduto() {
+		return likeProduto;
+	}
+
+	public void setLikeProduto(List<Produto> likeProduto) {
+		this.likeProduto = likeProduto;
+	}
+	
 }

@@ -1,5 +1,7 @@
 package com.nutrilight.nutriLight.model;
 
+import java.util.List;
+
 public class UserLogin {
 	
 	private long id;
@@ -23,6 +25,8 @@ public class UserLogin {
 	private String foto;
 	
 	private double imc;
+	
+	private List<Produto> produtos;
 
 	public long getId() {
 		return id;
@@ -110,6 +114,14 @@ public class UserLogin {
 
 	public void setImc(double imc) {
 		this.imc = imc;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
 	}
 
 }

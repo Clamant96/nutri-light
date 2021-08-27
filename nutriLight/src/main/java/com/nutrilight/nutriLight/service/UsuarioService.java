@@ -10,9 +10,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nutrilight.nutriLight.model.Lista;
+import com.nutrilight.nutriLight.model.Produto;
 import com.nutrilight.nutriLight.model.UserLogin;
 import com.nutrilight.nutriLight.model.Usuario;
 import com.nutrilight.nutriLight.repository.ListaRepository;
+import com.nutrilight.nutriLight.repository.ProdutoRepository;
 import com.nutrilight.nutriLight.repository.UsuarioRepository;
 
 @Service
@@ -23,6 +25,9 @@ public class UsuarioService {
 	
 	@Autowired
 	private ListaRepository listaRepository;
+	
+	@Autowired
+	private ProdutoRepository produtoRepository;
 
 	public Optional<Usuario> CadastrarUsuario(Usuario usuario) {	
 		
@@ -93,6 +98,40 @@ public class UsuarioService {
 		usuario.setSenha(senhaEncoder);
 		
 		return Optional.of(repository.save(usuario));
+	}
+	
+	/* GERENCIAMENTO DE TABELAS ASSOCIATIVAS (MANY-TO-MANY) */
+	public Usuario likePostagem(long idUsuario, long idPostagem) {
+		
+		Optional<Usuario> usuarioExistente = repository.findById(idUsuario);
+		Optional<Produto> produtoExistente = produtoRepository.findById(idPostagem);
+		
+		/* CASO CASO O USUARIO AINDA NAO TENHA DADO LIKE, ENTAO E COMPUTADO UM NOVO LIKE NO PRODUTO */
+		if(!(usuarioExistente.get().getLikeProduto().contains(produtoExistente.get()))) {
+			
+			if(usuarioExistente.isPresent() && produtoExistente.isPresent()) {
+				usuarioExistente.get().getLikeProduto().add(produtoExistente.get());
+				
+				repository.save(usuarioExistente.get());
+				
+				return repository.save(usuarioExistente.get());
+				
+			}
+			
+		}else {
+			/* CASO CONTRARIO O LIKE DO USUARIO E REMOVIDO DO PRODUTO */
+			if(usuarioExistente.isPresent() && produtoExistente.isPresent()) {
+				usuarioExistente.get().getLikeProduto().remove(produtoExistente.get());
+				
+				repository.save(usuarioExistente.get());
+				
+				return repository.save(usuarioExistente.get());
+				
+			}
+			
+		}
+
+		return null;
 	}
 
 }
