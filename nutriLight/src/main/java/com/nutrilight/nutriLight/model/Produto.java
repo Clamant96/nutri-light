@@ -60,6 +60,8 @@ public class Produto {
 	@ManyToMany(mappedBy = "likeProduto", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({"nome", "idade", "peso", "username", "senha", "altura", "foto", "imc", "lista", "produtos", "likeProduto"})
 	private List<Usuario> like = new ArrayList<>();
+	
+	private String categoriaTipoIMC;
 
 	public long getId() {
 		return id;
@@ -131,6 +133,14 @@ public class Produto {
 
 	public void setLike(List<Usuario> like) {
 		this.like = like;
+	}
+
+	public String getCategoriaTipoIMC() {
+		return categoriaTipoIMC;
+	}
+
+	public void setCategoriaTipoIMC(String categoriaTipoIMC) {
+		this.categoriaTipoIMC = categoriaTipoIMC;
 	}
 	
 }

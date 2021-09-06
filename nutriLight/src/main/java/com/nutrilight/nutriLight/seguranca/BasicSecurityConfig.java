@@ -47,6 +47,7 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/produtos/tabela_produtos").permitAll()
 		.antMatchers("/produtos/tabela_produtos/produtos/{idProduto}/lista/{idLista}").permitAll()
 		.antMatchers("/produtos/deleta/tabela_produtos/produtos/{idProduto}/lista/{idLista}").permitAll()
+		.antMatchers("/produtos/postagensUsuario/{id}").permitAll()
 		.antMatchers("/mensagens").permitAll()
 		.antMatchers("/mensagens/{id}").permitAll()
 		// nao deixar acessar os demais endpoints sem estarem com um token

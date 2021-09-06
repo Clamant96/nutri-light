@@ -65,7 +65,7 @@ public class Usuario {
 	  joinColumns = @JoinColumn(name = "produto_id"), 
 	  inverseJoinColumns = @JoinColumn(name = "usuario_id")
 	  )
-	@JsonIgnoreProperties({"nome", "kg", "img", "categoria", "listas", "mensagens", "usuario", "like"})
+	@JsonIgnoreProperties({"nome", "kg", "img", "categoria", "listas", "mensagens", "usuario", "like", "categoriaTipoIMC"})
 	private List<Produto> likeProduto = new ArrayList<>();
 
 	public long getId() {

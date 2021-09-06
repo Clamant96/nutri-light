@@ -32,7 +32,7 @@ public class Lista {
 	private Usuario usuario;
 	
 	@ManyToMany(mappedBy = "listas", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JsonIgnoreProperties({"nome", "kg", "img", "listas", "categoria", "mensagens", "usuario"})
+	@JsonIgnoreProperties({"nome", "kg", "img", "categoria", "listas", "mensagens", "usuario", "like", "categoriaTipoIMC"})
 	private List<Produto> produtos = new ArrayList<>();
 
 	public long getId() {

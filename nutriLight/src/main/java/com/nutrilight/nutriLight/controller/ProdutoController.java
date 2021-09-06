@@ -45,6 +45,12 @@ public class ProdutoController {
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
+	@GetMapping("/produtosUsuario/{id}")
+	public ResponseEntity<List<Produto>> findByPostagemUsuario(@PathVariable long id) {
+		
+		return ResponseEntity.ok(repository.findAllByUsuario(id));
+	}
+	
 	@PostMapping
 	public ResponseEntity<Produto> postProduto(@RequestBody Produto produto) {
 		
