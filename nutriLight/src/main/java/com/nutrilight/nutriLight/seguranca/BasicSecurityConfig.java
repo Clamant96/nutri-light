@@ -2,6 +2,7 @@ package com.nutrilight.nutriLight.seguranca;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -34,6 +35,15 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/**").permitAll() 
 		.antMatchers("/usuarios/logar").permitAll()
 		.antMatchers("/usuarios/cadastrar").permitAll()
+		.antMatchers(HttpMethod.GET, "/usuarios").permitAll()
+		.antMatchers(HttpMethod.GET, "/categorias").permitAll()
+		.antMatchers(HttpMethod.GET, "/listas").permitAll()
+		.antMatchers(HttpMethod.GET, "/produtos").permitAll()
+		.antMatchers(HttpMethod.GET, "/mensagens").permitAll()
+		
+		
+		/*.antMatchers("/usuarios/logar").permitAll()
+		.antMatchers("/usuarios/cadastrar").permitAll()
 		.antMatchers("/usuarios/{id}").permitAll()
 		.antMatchers("/usuarios/likes_usuario_postagem/likeProduto/{idProduto}/like/{idUsuario}").permitAll()
 		.antMatchers("/categorias").permitAll()
@@ -47,9 +57,9 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/produtos/tabela_produtos").permitAll()
 		.antMatchers("/produtos/tabela_produtos/produtos/{idProduto}/lista/{idLista}").permitAll()
 		.antMatchers("/produtos/deleta/tabela_produtos/produtos/{idProduto}/lista/{idLista}").permitAll()
-		.antMatchers("/produtos/postagensUsuario/{id}").permitAll()
+		.antMatchers("/produtos/produtosUsuario/{id}").permitAll()
 		.antMatchers("/mensagens").permitAll()
-		.antMatchers("/mensagens/{id}").permitAll()
+		.antMatchers("/mensagens/{id}").permitAll()*/
 		// nao deixar acessar os demais endpoints sem estarem com um token
 		.anyRequest().authenticated()
 		// trabalha com uma seguranca basica
